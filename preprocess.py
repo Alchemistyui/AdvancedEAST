@@ -6,6 +6,7 @@ from tqdm import tqdm
 
 import cfg
 from label import shrink
+import pdb
 
 
 def batch_reorder_vertexes(xy_list_array):
@@ -71,7 +72,8 @@ def reorder_vertexes(xy_list):
 def resize_image(im, max_img_size=cfg.max_train_img_size):
     im_width = np.minimum(im.width, max_img_size)
     if im_width == max_img_size < im.width:
-        im_height = int((im_width / im.width) * im.height)
+        # im_height = int((im_width / im.width) * im.height)
+        im_height = int(im_width * im.height / im.width)
     else:
         im_height = im.height
     o_height = np.minimum(im_height, max_img_size)
@@ -81,6 +83,7 @@ def resize_image(im, max_img_size=cfg.max_train_img_size):
         o_width = im_width
     d_wight = o_width - (o_width % 32)
     d_height = o_height - (o_height % 32)
+    # pdb.set_trace()
     return d_wight, d_height
 
 
